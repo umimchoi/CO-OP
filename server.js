@@ -13,6 +13,8 @@ const swaggerUI = require("swagger-ui-express");
 
 dotenv.config({ path: "./config/config.env" });
 
+connectDB();
+
 const app = express();
 /*
 const hospitals = require("./routes/hospitals");
