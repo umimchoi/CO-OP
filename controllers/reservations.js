@@ -10,7 +10,7 @@ exports.getReservations = async (req, res, next) => {
       select: "name province tel",
     });
   } else {
-    if (req.params.hospitalId) {
+    if (req.params.coworkingSpaceId) {
       query = Reservation.find({
         coworkingSpace: req.params.coworkingSpaceId,
       }).populate({
