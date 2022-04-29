@@ -14,30 +14,30 @@ exports.getCoworkingSpaces = async (req, res, next) => {
     (match) => `$${match}`
   );
 
-  //********************************** add populate when reservation is done********************/
-  query = CoworkingSpace.find(JSON.parse(queryStr)).populate("reservations");
-  //query = CoworkingSpace.find(JSON.parse(queryStr))
-
-  if (req.query.select) {
-    const fields = req.query.select.split(",").join(" ");
-    query = query.select(fields);
-  }
-  if (req.query.sort) {
-    const sortBy = req.query.sort.split(",").join(" ");
-    query = query.sort(sortBy);
-  } else {
-    query = query.sort("-createdAt");
-  }
-
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 25;
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
   try {
+    //********************************** add populate when reservation is done********************/
+    query = CoworkingSpace.find(JSON.parse(queryStr)).populate("reservations");
+    //query = CoworkingSpace.find(JSON.parse(queryStr))
+
+    if (req.query.select) {
+      const fields = req.query.select.split(",").join(" ");
+      query = query.select(fields);
+    }
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort("-createdAt");
+    }
+
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 25;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
     const total = await CoworkingSpace.countDocuments();
     query = query.skip(startIndex).limit(limit);
- 
+
     const coworkingSpaces = await query;
 
     const pagination = {};
@@ -69,16 +69,14 @@ exports.getCoworkingSpace = async (req, res, next) => {
     const coworkingSpace = await CoworkingSpace.findById(req.params.id);
 
     if (!coworkingSpace) {
-      res.status(400).json({ success: fase });
+      res.status(400).json({ success: false });
     }
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        count: coworkingSpace.length,
-        data: coworkingSpace,
-      });
+    res.status(200).json({
+      success: true,
+      count: coworkingSpace.length,
+      data: coworkingSpace,
+    });
   } catch (err) {
     res.status(400).json({ success: false });
   }
