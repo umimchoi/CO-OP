@@ -10,11 +10,9 @@ const hpp = require("hpp");
 const cors = require("cors");
 
 const coworkingSpaces = require("./routes/coworkingSpace");
-
 const auth = require("./routes/auth");
-/*
-const appointments = require("./routes/appointments");
-*/
+const reservations = require("./routes/reservation");
+
 
 dotenv.config({ path: "./config/config.env" });
 
@@ -37,6 +35,7 @@ app.use(cors());
 
 app.use("/coworkingSpaces", coworkingSpaces);
 app.use("/auth", auth);
+app.use("/reservations", reservations);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(

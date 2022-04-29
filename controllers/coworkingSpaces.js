@@ -15,8 +15,8 @@ exports.getCoworkingSpaces = async (req, res, next) => {
   );
 
   //********************************** add populate when reservation is done********************/
-  //query = CoworkingSpace.find(JSON.parse(queryStr)).populate("reservations");
-  query = CoworkingSpace.find(JSON.parse(queryStr))
+  query = CoworkingSpace.find(JSON.parse(queryStr)).populate("reservations");
+  //query = CoworkingSpace.find(JSON.parse(queryStr))
 
   if (req.query.select) {
     const fields = req.query.select.split(",").join(" ");
