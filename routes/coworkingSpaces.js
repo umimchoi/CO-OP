@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const {
   getCoworkingSpaces,
   getCoworkingSpace,
@@ -7,9 +6,11 @@ const {
   updateCoworkingSpace,
   deleteCoworkingSpace,
 } = require("../controllers/coworkingSpaces");
-const { protect, authorize } = require("../middleware/auth");
-const reservationRouter = require("./reservation");
 
+const reservationRouter = require("./reservations");
+const router = express.Router();
+
+const { protect, authorize } = require("../middleware/auth");
 router.use("/:coworkingSpaceId/reservations/", reservationRouter);
 
 router

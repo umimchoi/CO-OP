@@ -9,16 +9,15 @@ const rateLimit = require("express-rate-limit");
 const hpp = require("hpp");
 const cors = require("cors");
 
-const coworkingSpaces = require("./routes/coworkingSpace");
-const auth = require("./routes/auth");
-const reservations = require("./routes/reservation");
-
-
 dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
 const app = express();
+const coworkingSpaces = require("./routes/coworkingSpaces");
+const auth = require("./routes/auth");
+const reservations = require("./routes/reservations");
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(mongoSanitize());
