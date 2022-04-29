@@ -7,17 +7,17 @@ const {
   updateCoworkingSpace,
   deleteCoworkingSpace,
 } = require("../controllers/coworkingSpaces");
-//const { protect, authorize } = require("../middleware/auth");
+const { protect, authorize } = require("../middleware/auth");
 //const reservationRouter = require("./reservations");
 
 router
   .route("/")
   .get(getCoworkingSpaces)
-  .post(createCoworkingSpace);
+  .post(protect, authorize("admin"), createCoworkingSpace);
 router
   .route("/:id")
   .get(getCoworkingSpace)
-  .put(updateCoworkingSpace)
-  .delete(deleteCoworkingSpace);
+  .put(protect, authorize("admin"), updateCoworkingSpace)
+  .delete(protect, authorize("admin"), deleteCoworkingSpace);
 
 module.exports = router;

@@ -8,12 +8,11 @@ const xss = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 const hpp = require("hpp");
 const cors = require("cors");
-const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUI = require("swagger-ui-express");
 
 const coworkingSpaces = require("./routes/coworkingSpace");
-/*
+
 const auth = require("./routes/auth");
+/*
 const appointments = require("./routes/appointments");
 */
 
@@ -37,6 +36,7 @@ app.use(hpp());
 app.use(cors());
 
 app.use("/coworkingSpaces", coworkingSpaces);
+app.use("/auth", auth);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(
