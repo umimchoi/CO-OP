@@ -11,16 +11,17 @@ const cors = require("cors");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
+const coworkingSpaces = require("./routes/coworkingSpace");
+/*
+const auth = require("./routes/auth");
+const appointments = require("./routes/appointments");
+*/
+
 dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
 const app = express();
-/*
-const hospitals = require("./routes/hospitals");
-const auth = require("./routes/auth");
-const appointments = require("./routes/appointments");
-*/
 app.use(express.json());
 app.use(cookieParser());
 app.use(mongoSanitize());
@@ -34,6 +35,8 @@ const limiter = rateLimit({
 app.use(limiter);
 app.use(hpp());
 app.use(cors());
+
+app.use("/coworkingSpaces", coworkingSpaces);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(
