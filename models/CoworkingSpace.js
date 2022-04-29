@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 //name, address, and telephone number, and open-close time.
 const CoworkingSpaceSchema = new mongoose.Schema(
   {
@@ -43,7 +43,7 @@ const CoworkingSpaceSchema = new mongoose.Schema(
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
-); 
+);
 
 CoworkingSpaceSchema.virtual("reservations", {
   ref: "Reservation",
@@ -53,7 +53,9 @@ CoworkingSpaceSchema.virtual("reservations", {
 });
 
 CoworkingSpaceSchema.pre("remove", async function (next) {
-  console.log(`Reservations are being removed from co-working space ${this._id}`);
+  console.log(
+    `Reservations are being removed from co-working space ${this._id}`
+  );
   await this.model("Reservation").deleteMany({ coworkingSpace: this._id });
   next();
 });
