@@ -16,7 +16,6 @@ exports.getCoworkingSpaces = async (req, res, next) => {
 
   //********************************** add populate when reservation is done********************/
   query = CoworkingSpace.find(JSON.parse(queryStr)).populate("reservations");
-  //query = CoworkingSpace.find(JSON.parse(queryStr))
 
   if (req.query.select) {
     const fields = req.query.select.split(",").join(" ");
@@ -37,7 +36,7 @@ exports.getCoworkingSpaces = async (req, res, next) => {
   try {
     const total = await CoworkingSpace.countDocuments();
     query = query.skip(startIndex).limit(limit);
- 
+
     const coworkingSpaces = await query;
 
     const pagination = {};
@@ -69,16 +68,14 @@ exports.getCoworkingSpace = async (req, res, next) => {
     const coworkingSpace = await CoworkingSpace.findById(req.params.id);
 
     if (!coworkingSpace) {
-      res.status(400).json({ success: fase });
+      res.status(400).json({ success: false });
     }
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        count: coworkingSpace.length,
-        data: coworkingSpace,
-      });
+    res.status(200).json({
+      success: true,
+      count: coworkingSpace.length,
+      data: coworkingSpace,
+    });
   } catch (err) {
     res.status(400).json({ success: false });
   }
@@ -127,7 +124,6 @@ exports.deleteCoworkingSpace = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: {} });
   } catch (err) {
-    console.log(err.stack);
     res.status(400).json({ success: false });
   }
 };

@@ -1,6 +1,5 @@
 const Reservation = require("../models/Reservation");
 const CoworkingSpace = require("../models/CoworkingSpace");
-const mongoose = require("mongoose");
 
 exports.getReservations = async (req, res, next) => {
   let query;
@@ -32,7 +31,6 @@ exports.getReservations = async (req, res, next) => {
       data: reservations,
     });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ success: false, message: "Cannot find Reservation" });
@@ -57,7 +55,6 @@ exports.getReservation = async (req, res, next) => {
       data: reservation,
     });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ success: false, message: "Cannot find Reservation" });
@@ -98,7 +95,6 @@ exports.addReservation = async (req, res, next) => {
       data: reservation,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Cannot create reservation",
@@ -137,7 +133,6 @@ exports.updateReservation = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: reservation });
   } catch (error) {
-    console.log(error.stack);
     return res
       .status(500)
       .json({ success: false, message: "Cannot update reservation" });
@@ -172,7 +167,6 @@ exports.deleteReservation = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: {} });
   } catch (err) {
-    console.log(err.stack);
     return res
       .status(500)
       .json({ success: false, message: "Cannot delete reservation" });
