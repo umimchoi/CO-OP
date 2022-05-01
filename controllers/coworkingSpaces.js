@@ -117,7 +117,7 @@ exports.deleteCoworkingSpace = async (req, res, next) => {
     if (!coworkingSpace) {
       return res
         .status(400)
-        .json({ sucess: false, msg: "cannot find a co-working space" });
+        .json({ success: false, msg: "cannot find a co-working space" });
     }
 
     await coworkingSpace.remove();
