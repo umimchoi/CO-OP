@@ -120,10 +120,10 @@ exports.deleteCoworkingSpace = async (req, res, next) => {
         .json({ success: false, msg: "cannot find a co-working space" });
     }
 
-    coworkingSpace.remove();
-    findById(req.params.id);
+    await coworkingSpace.remove();
     res.status(200).json({ success: true, data: {} });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ success: false });
   }
 };
