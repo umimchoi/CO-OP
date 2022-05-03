@@ -15,11 +15,11 @@ router.use("/:coworkingSpaceId/reservations/", reservationRouter);
 
 router
   .route("/")
-  .get(protect, getCoworkingSpaces)
+  .get(getCoworkingSpaces)
   .post(protect, authorize("admin"), createCoworkingSpace);
 router
   .route("/:id")
-  .get(protect, getCoworkingSpace)
+  .get(getCoworkingSpace)
   .put(protect, authorize("admin"), updateCoworkingSpace)
   .delete(protect, authorize("admin"), deleteCoworkingSpace);
 
