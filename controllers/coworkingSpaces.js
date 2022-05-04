@@ -81,11 +81,15 @@ exports.getCoworkingSpace = async (req, res, next) => {
 };
 
 exports.createCoworkingSpace = async (req, res, next) => {
-  const coworkingSpace = await CoworkingSpace.create(req.body);
-  res.status(201).json({
-    success: true,
-    data: coworkingSpace,
-  });
+  try {
+    const coworkingSpace = await CoworkingSpace.create(req.body);
+    res.status(201).json({
+      success: true,
+      data: coworkingSpace,
+    });
+  } catch (err) {
+    res.status(400).json({ success: false });
+  }
 };
 
 exports.updateCoworkingSpace = async (req, res, next) => {
