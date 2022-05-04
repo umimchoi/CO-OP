@@ -92,7 +92,7 @@ exports.addReservation = async (req, res, next) => {
     const existedReservations = await Reservation.find({ user: req.user.id });
     if (existedReservations.length >= 3 && req.user.role != "admin") {
       return res.status(400).json({
-        success: true,
+        success: false,
         message: `The user with ID ${req.user.id} has already made 3 reservations.`,
       });
     }
